@@ -48,7 +48,6 @@
         background: #ff416c;
     }
 
-    /* Post phim */
     .posts {
         width: 90%;
         margin: 40px auto;
@@ -120,9 +119,19 @@
     <button onclick="redirectToMovie()">Tìm</button>
 </div>
 
-<!-- Danh sách Post -->
 <div class="posts">
 
+    <!-- Post mới bạn yêu cầu -->
+    <div class="card">
+        <img src="tongtai.png" alt="Tổng Tài Bá Đạo">
+        <div class="card-content">
+            <h3>Tổng Tài Bá Đạo</h3>
+            <p>Chuyện tình đầy kịch tính giữa tổng tài lạnh lùng và cô gái đặc biệt.</p>
+            <button class="watch-btn" onclick="redirectToMovie()">Xem Ngay</button>
+        </div>
+    </div>
+
+    <!-- Các post cũ -->
     <div class="card">
         <img src="https://picsum.photos/400/300?random=1">
         <div class="card-content">
@@ -132,39 +141,15 @@
         </div>
     </div>
 
-    <div class="card">
-        <img src="https://picsum.photos/400/300?random=2">
-        <div class="card-content">
-            <h3>Hợp Đồng Hôn Nhân</h3>
-            <p>Một bản hợp đồng giả nhưng lại mở ra tình yêu thật.</p>
-            <button class="watch-btn" onclick="redirectToMovie()">Xem Ngay</button>
-        </div>
-    </div>
-
-    <div class="card">
-        <img src="https://picsum.photos/400/300?random=3">
-        <div class="card-content">
-            <h3>Tình Yêu Của Đại Boss</h3>
-            <p>Boss quyền lực và cô thư ký ngốc nghếch tạo nên chuyện tình ngọt ngào.</p>
-            <button class="watch-btn" onclick="redirectToMovie()">Xem Ngay</button>
-        </div>
-    </div>
-
 </div>
 
 <footer>
-© Digital Marketing
+© 2026 Website Phim Tổng Tài | Xem phim chất lượng cao
 </footer>
 
 <script>
     function redirectToMovie() {
-        const keyword = document.getElementById("searchInput").value.trim();
-
-        if (keyword !== "") {
-            window.location.href = "https://phimreview.vn/tron-bo-thuyet-minh-thuoc-ban-quyen-review-phim-tron-bo-full";
-        } else {
-            window.location.href = "https://phimreview.vn/tron-bo-thuyet-minh-thuoc-ban-quyen-review-phim-tron-bo-full";
-        }
+        window.location.href = "https://phimreview.vn/tron-bo-thuyet-minh-thuoc-ban-quyen-review-phim-tron-bo-full";
     }
 </script>
 
