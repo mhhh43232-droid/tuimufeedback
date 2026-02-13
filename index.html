@@ -8,48 +8,53 @@
 <style>
     body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        font-family: 'Segoe UI', sans-serif;
+        background: #141414;
         color: white;
-        text-align: center;
     }
 
     header {
-        padding: 30px;
-        font-size: 28px;
+        padding: 25px;
+        font-size: 30px;
         font-weight: bold;
+        background: linear-gradient(to bottom, #000, #141414);
+        text-align: center;
+        letter-spacing: 2px;
     }
 
     .search-box {
-        margin: 30px auto;
-        width: 60%;
+        text-align: center;
+        margin: 30px 0;
     }
 
     input {
-        width: 60%;
+        width: 50%;
         padding: 12px;
-        border-radius: 25px;
+        border-radius: 4px;
         border: none;
         font-size: 16px;
+        outline: none;
     }
 
     button {
         padding: 12px 20px;
-        border-radius: 25px;
+        border-radius: 4px;
         border: none;
-        background: #ff4b2b;
+        background: #e50914;
         color: white;
         font-size: 16px;
         cursor: pointer;
         margin-left: 10px;
+        transition: 0.3s;
     }
 
     button:hover {
-        background: #ff416c;
+        background: #ff1f1f;
+        transform: scale(1.05);
     }
 
     .posts {
-        width: 90%;
+        width: 95%;
         margin: 40px auto;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -57,21 +62,28 @@
     }
 
     .card {
-        background: rgba(255,255,255,0.1);
-        border-radius: 15px;
+        background: #1f1f1f;
+        border-radius: 6px;
         overflow: hidden;
-        backdrop-filter: blur(10px);
-        transition: 0.3s;
+        transition: 0.4s;
+        cursor: pointer;
+        position: relative;
     }
 
     .card:hover {
-        transform: scale(1.05);
+        transform: scale(1.1);
+        z-index: 10;
     }
 
     .card img {
         width: 100%;
-        height: 180px;
+        height: 200px;
         object-fit: cover;
+        transition: 0.4s;
+    }
+
+    .card:hover img {
+        opacity: 0.6;
     }
 
     .card-content {
@@ -80,80 +92,73 @@
 
     .card h3 {
         margin: 10px 0;
+        font-size: 18px;
     }
 
     .card p {
         font-size: 14px;
-        opacity: 0.9;
+        color: #ccc;
     }
 
     .watch-btn {
         margin-top: 10px;
         padding: 8px 15px;
         border: none;
-        border-radius: 20px;
-        background: #00c6ff;
+        border-radius: 4px;
+        background: #e50914;
         color: white;
         cursor: pointer;
+        transition: 0.3s;
     }
 
     .watch-btn:hover {
-        background: #0072ff;
+        background: #ff1f1f;
     }
 
     footer {
-        margin-top: 50px;
+        background: #000;
+        text-align: center;
         padding: 20px;
         font-size: 14px;
-        opacity: 0.8;
+        color: #888;
+        margin-top: 50px;
     }
 </style>
 </head>
 
 <body>
 
-<header>🎬 Tìm Phim Tổng Tài Hot Nhất</header>
+<header>🎬 PHIM TỔNG TÀI HOT NHẤT</header>
 
 <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Nhập tên phim tổng tài...">
+    <input type="text" placeholder="Nhập tên phim tổng tài...">
     <button onclick="redirectToMovie()">Tìm</button>
 </div>
 
 <div class="posts">
 
-    <!-- Post mới bạn yêu cầu -->
-    <div class="card">
+    <div class="card" onclick="redirectToMovie()">
         <img src="tongtai.png" alt="Tổng Tài Bá Đạo">
         <div class="card-content">
             <h3>Tổng Tài Bá Đạo</h3>
             <p>Chuyện tình đầy kịch tính giữa tổng tài lạnh lùng và cô gái đặc biệt.</p>
-            <button class="watch-btn" onclick="redirectToMovie()">Xem Ngay</button>
+            <button class="watch-btn">Xem Ngay</button>
         </div>
     </div>
 
-    <div class="card" onclick="redirectToMovie()" style="cursor:pointer;">
-    <img src="tongtai.png" alt="Tổng Tài Bá Đạo">
-    <div class="card-content">
-        <h3>Tổng Tài Bá Đạo</h3>
-        <p>Chuyện tình đầy kịch tính giữa tổng tài lạnh lùng và cô gái đặc biệt.</p>
-        <button class="watch-btn">Xem Ngay</button>
-    </div>
-</div>
-
-    <!-- Các post cũ -->
-    <div class="card">
+    <div class="card" onclick="redirectToMovie()">
         <img src="https://picsum.photos/400/300?random=1">
         <div class="card-content">
             <h3>Tổng Tài Bá Đạo Yêu Tôi</h3>
             <p>Cuộc gặp định mệnh giữa cô gái nghèo và vị tổng tài lạnh lùng.</p>
-            <button class="watch-btn" onclick="redirectToMovie()">Xem Ngay</button>
+            <button class="watch-btn">Xem Ngay</button>
         </div>
     </div>
 
 </div>
 
 <footer>
-© 2026 Website Phim Tổng Tài | Xem phim chất lượng cao
+© 2026 PHIM TỔNG TÀI | All Rights Reserved
 </footer>
 
 <script>
