@@ -21,7 +21,7 @@
     }
 
     .search-box {
-        margin: 20px auto;
+        margin: 50px auto;
         width: 60%;
     }
 
@@ -47,27 +47,6 @@
     button:hover {
         background: #ff416c;
     }
-
-    .results {
-        margin-top: 30px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .movie-card {
-        background: white;
-        color: black;
-        width: 200px;
-        margin: 15px;
-        padding: 15px;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-
-    .movie-card h3 {
-        margin: 10px 0;
-    }
 </style>
 </head>
 
@@ -76,43 +55,20 @@
 <header>🎬 Website Tìm Phim Tổng Tài</header>
 
 <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Nhập từ khóa (ví dụ: tổng tài)...">
-    <button onclick="searchMovie()">Tìm</button>
+    <input type="text" id="searchInput" placeholder="Nhập từ khóa...">
+    <button onclick="redirectToMovie()">Tìm</button>
 </div>
 
-<div class="results" id="results"></div>
-
 <script>
-    const movies = [
-        { title: "Tổng Tài Bá Đạo Yêu Tôi", desc: "Chuyện tình giữa cô gái nghèo và tổng tài lạnh lùng." },
-        { title: "Cô Vợ Hợp Đồng Của Tổng Tài", desc: "Hôn nhân giả nhưng tình cảm là thật." },
-        { title: "Tổng Tài Lạnh Lùng Và Cô Thư Ký", desc: "Mối quan hệ oan gia nơi công sở." },
-        { title: "Boss Bá Đạo Sủng Vợ", desc: "Tổng tài giàu có yêu cô gái bình thường." }
-    ];
+    function redirectToMovie() {
+        // Có thể kiểm tra nếu muốn
+        const keyword = document.getElementById("searchInput").value.trim();
 
-    function searchMovie() {
-        const keyword = document.getElementById("searchInput").value.toLowerCase();
-        const resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = "";
-
-        const filtered = movies.filter(movie => 
-            movie.title.toLowerCase().includes(keyword)
-        );
-
-        if (filtered.length === 0) {
-            resultsDiv.innerHTML = "<p>Không tìm thấy phim phù hợp.</p>";
-            return;
+        if (keyword !== "") {
+            window.location.href = "https://phimreview.vn/tron-bo-thuyet-minh-thuoc-ban-quyen-review-phim-tron-bo-full";
+        } else {
+            alert("Vui lòng nhập từ khóa trước khi tìm.");
         }
-
-        filtered.forEach(movie => {
-            const div = document.createElement("div");
-            div.className = "movie-card";
-            div.innerHTML = `
-                <h3>${movie.title}</h3>
-                <p>${movie.desc}</p>
-            `;
-            resultsDiv.appendChild(div);
-        });
     }
 </script>
 
