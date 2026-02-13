@@ -8,7 +8,7 @@
 <style>
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI',sans-serif;
     background:#141414;
     color:white;
 }
@@ -60,14 +60,14 @@ header{
     background:#1c1c1c;
     border-radius:8px;
     overflow:hidden;
-    transition:0.3s;
+    transition:0.2s;
+    cursor:pointer;
 }
 
 .card:active{
-    transform:scale(0.97);
+    transform:scale(0.95);
 }
 
-/* Poster 2:3 */
 .card img{
     width:100%;
     aspect-ratio:2/3;
@@ -101,7 +101,7 @@ header{
     font-size:14px;
 }
 
-/* DESKTOP nâng cấp */
+/* DESKTOP */
 @media(min-width:768px){
     header{
         font-size:28px;
@@ -157,18 +157,17 @@ footer{
             <button class="watch-btn">Xem Ngay</button>
         </div>
     </div>
-    
+
     <div class="card" onclick="redirectToMovie()">
-        <img src="https://picsum.photos/400/600?random=2">
+        <img src="https://picsum.photos/400/600?random=3">
         <div class="card-content">
-            <h3 tét 1</h3>
-            <p>tét .</p>
+            <h3>Test 1</h3>
+            <p>Phim thử nghiệm.</p>
             <button class="watch-btn">Xem Ngay</button>
         </div>
     </div>
 
-
-    
+</div>
 
 <footer>
 © 2026 NovaDev | All Rights Reserved
