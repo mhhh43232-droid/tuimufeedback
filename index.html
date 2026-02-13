@@ -8,166 +8,163 @@
 <style>
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI',sans-serif;
     background:#141414;
     color:white;
 }
 
+/* SPLASH */
+#splash{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    font-weight:bold;
+    z-index:9999;
+}
+
 /* HEADER */
 header{
-    padding:18px;
+    padding:15px;
     font-size:22px;
     font-weight:bold;
-    text-align:center;
-    background:#000;
-    letter-spacing:1px;
 }
 
-/* SEARCH */
-.search-box{
+/* SCROLL SECTION */
+.section{
     padding:15px;
+}
+
+.movie-row{
     display:flex;
-    gap:8px;
+    gap:10px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
 }
 
-.search-box input{
-    flex:1;
-    padding:12px;
-    border:none;
-    border-radius:6px;
-    font-size:16px;
+.movie-row::-webkit-scrollbar{
+    display:none;
 }
 
-.search-box button{
-    padding:12px 18px;
-    border:none;
-    border-radius:6px;
-    background:#e50914;
-    color:white;
-    font-size:16px;
-}
-
-/* POSTS GRID */
-.posts{
-    padding:15px;
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-    gap:12px;
-}
-
-/* CARD */
 .card{
+    min-width:140px;
     background:#1c1c1c;
     border-radius:8px;
     overflow:hidden;
+    flex-shrink:0;
     transition:0.3s;
 }
 
 .card:active{
-    transform:scale(0.97);
+    transform:scale(0.95);
 }
 
-/* Poster 2:3 */
 .card img{
     width:100%;
     aspect-ratio:2/3;
     object-fit:cover;
 }
 
-/* CONTENT */
-.card-content{
-    padding:10px;
+.card h4{
+    font-size:14px;
+    padding:8px;
 }
 
-.card h3{
-    font-size:15px;
-    margin:5px 0;
-}
-
-.card p{
+/* BOTTOM NAV */
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:55px;
+    background:#000;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
     font-size:13px;
+    border-top:1px solid #222;
+}
+
+.bottom-nav div{
+    text-align:center;
     color:#aaa;
 }
 
-/* BUTTON */
-.watch-btn{
-    margin-top:8px;
-    width:100%;
-    padding:10px;
-    border:none;
-    border-radius:6px;
-    background:#e50914;
-    color:white;
-    font-size:14px;
+.bottom-nav div.active{
+    color:#e50914;
 }
 
-/* DESKTOP nâng cấp */
+/* DESKTOP */
 @media(min-width:768px){
-    header{
-        font-size:28px;
-        padding:25px;
+    .card{
+        min-width:200px;
     }
-
-    .posts{
-        grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-        gap:20px;
-    }
-
-    .card:hover{
-        transform:scale(1.08);
-        z-index:10;
-    }
-}
-
-footer{
-    text-align:center;
-    padding:20px;
-    color:#777;
-    font-size:13px;
-    background:#000;
 }
 </style>
 </head>
 
 <body>
 
-<header>🎬 PHIM TỔNG TÀI HOT</header>
+<div id="splash">🎬 PHIM TỔNG TÀI</div>
 
-<div class="search-box">
-    <input type="text" placeholder="Tìm phim tổng tài...">
-    <button onclick="redirectToMovie()">Tìm</button>
+<header>Phim Hot Hôm Nay</header>
+
+<div class="section">
+    <div class="movie-row">
+
+        <div class="card" onclick="openApp()">
+            <img src="https://picsum.photos/400/600?random=1">
+            <h4>Tổng Tài Bá Đạo</h4>
+        </div>
+
+        <div class="card" onclick="openApp()">
+            <img src="https://picsum.photos/400/600?random=2">
+            <h4>Tổng Tài Yêu Tôi</h4>
+        </div>
+
+        <div class="card" onclick="openApp()">
+            <img src="https://picsum.photos/400/600?random=3">
+            <h4>Hợp Đồng Hôn Nhân</h4>
+        </div>
+
+        <div class="card" onclick="openApp()">
+            <img src="https://picsum.photos/400/600?random=4">
+            <h4>Tình Yêu Tổng Tài</h4>
+        </div>
+
+    </div>
 </div>
 
-<div class="posts">
-
-    <div class="card" onclick="redirectToMovie()">
-        <img src="https://picsum.photos/400/600?random=1">
-        <div class="card-content">
-            <h3>Tổng Tài Bá Đạo</h3>
-            <p>Tình yêu giữa tổng tài lạnh lùng và cô gái đặc biệt.</p>
-            <button class="watch-btn">Xem Ngay</button>
-        </div>
-    </div>
-
-    <div class="card" onclick="redirectToMovie()">
-        <img src="https://picsum.photos/400/600?random=2">
-        <div class="card-content">
-            <h3>Tổng Tài Bá Đạo Yêu Tôi</h3>
-            <p>Cuộc gặp định mệnh đầy kịch tính.</p>
-            <button class="watch-btn">Xem Ngay</button>
-        </div>
-    </div>
-
+<!-- Bottom Menu -->
+<div class="bottom-nav">
+    <div class="active">🏠<br>Trang chủ</div>
+    <div>🔥<br>Hot</div>
+    <div>🎬<br>Phim</div>
+    <div>👤<br>Tài khoản</div>
 </div>
-
-<footer>
-© 2026 PHIM TỔNG TÀI | All Rights Reserved
-</footer>
 
 <script>
-function redirectToMovie(){
-    window.location.href="https://phimreview.vn/tron-bo-thuyet-minh-thuoc-ban-quyen-review-phim-tron-bo-full";
+
+/* Splash screen */
+setTimeout(()=>{
+    document.getElementById("splash").style.display="none";
+},2000);
+
+/* Deep link mở app */
+function openApp(){
+    var appLink = "https://shope.ee/2LSodeMgzf";
+    var webLink = "https://phimreview.vn/tron-bo-thuyet-minh-thuoc-ban-quyen-review-phim-tron-bo-full";
+
+    window.location.href = appLink;
+
+    setTimeout(function(){
+        window.location.href = webLink;
+    },1500);
 }
+
 </script>
 
 </body>
