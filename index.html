@@ -1,205 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Movie Review App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tìm Phim Tổng Tài</title>
 
 <style>
-body{
-margin:0;
-font-family: Arial;
-background:#0f0f0f;
-color:white;
-}
-header{
-padding:20px;
-font-size:24px;
-font-weight:bold;
-background:#e50914;
-text-align:center;
-}
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
-input, textarea{
-width:100%;
-padding:8px;
-margin:5px 0;
-border:none;
-border-radius:5px;
-}
-button{
-padding:10px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
-.add-btn{
-background:#e50914;
-color:white;
-width:100%;
-}
-.search{
-margin:20px 0;
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-gap:15px;
-}
-.card{
-background:#1c1c1c;
-padding:10px;
-border-radius:10px;
-position:relative;
-}
-.card img{
-width:100%;
-height:250px;
-object-fit:cover;
-border-radius:8px;
-}
-.card h3{
-margin:5px 0;
-}
-.stars span{
-cursor:pointer;
-font-size:18px;
-color:gray;
-}
-.stars .active{
-color:gold;
-}
-.delete{
-background:#444;
-color:white;
-width:100%;
-margin-top:5px;
-}
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        text-align: center;
+    }
+
+    header {
+        padding: 30px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .search-box {
+        margin: 20px auto;
+        width: 60%;
+    }
+
+    input {
+        width: 70%;
+        padding: 12px;
+        border-radius: 25px;
+        border: none;
+        font-size: 16px;
+    }
+
+    button {
+        padding: 12px 20px;
+        border-radius: 25px;
+        border: none;
+        background: #ff4b2b;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    button:hover {
+        background: #ff416c;
+    }
+
+    .results {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .movie-card {
+        background: white;
+        color: black;
+        width: 200px;
+        margin: 15px;
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .movie-card h3 {
+        margin: 10px 0;
+    }
 </style>
 </head>
 
 <body>
 
-<header>🎬 Movie Review Pro</header>
+<header>🎬 Website Tìm Phim Tổng Tài</header>
 
-<div class="container">
-
-<h3>Thêm phim mới</h3>
-<input type="text" id="title" placeholder="Tên phim">
-<input type="file" id="poster" accept="image/*">
-<textarea id="review" placeholder="Cảm nhận..."></textarea>
-
-<div class="stars" id="starSelect"></div>
-
-<button class="add-btn" onclick="addMovie()">Thêm phim</button>
-
-<input class="search" type="text" id="search" placeholder="Tìm phim..." onkeyup="displayMovies()">
-
-<div class="grid" id="movieList"></div>
-
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Nhập từ khóa (ví dụ: tổng tài)...">
+    <button onclick="searchMovie()">Tìm</button>
 </div>
+
+<div class="results" id="results"></div>
 
 <script>
-let movies = JSON.parse(localStorage.getItem("movies")) || [];
-let selectedRating = 0;
+    const movies = [
+        { title: "Tổng Tài Bá Đạo Yêu Tôi", desc: "Chuyện tình giữa cô gái nghèo và tổng tài lạnh lùng." },
+        { title: "Cô Vợ Hợp Đồng Của Tổng Tài", desc: "Hôn nhân giả nhưng tình cảm là thật." },
+        { title: "Tổng Tài Lạnh Lùng Và Cô Thư Ký", desc: "Mối quan hệ oan gia nơi công sở." },
+        { title: "Boss Bá Đạo Sủng Vợ", desc: "Tổng tài giàu có yêu cô gái bình thường." }
+    ];
 
-// Tạo sao chọn rating
-const starSelect = document.getElementById("starSelect");
-for(let i=1;i<=5;i++){
-let span=document.createElement("span");
-span.innerHTML="★";
-span.onclick=function(){
-selectedRating=i;
-updateStars();
-};
-starSelect.appendChild(span);
-}
+    function searchMovie() {
+        const keyword = document.getElementById("searchInput").value.toLowerCase();
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = "";
 
-function updateStars(){
-let stars=starSelect.children;
-for(let i=0;i<stars.length;i++){
-stars[i].classList.remove("active");
-if(i<selectedRating){
-stars[i].classList.add("active");
-}
-}
-}
+        const filtered = movies.filter(movie => 
+            movie.title.toLowerCase().includes(keyword)
+        );
 
-function saveMovies(){
-localStorage.setItem("movies",JSON.stringify(movies));
-}
+        if (filtered.length === 0) {
+            resultsDiv.innerHTML = "<p>Không tìm thấy phim phù hợp.</p>";
+            return;
+        }
 
-function addMovie(){
-const title=document.getElementById("title").value;
-const review=document.getElementById("review").value;
-const file=document.getElementById("poster").files[0];
-
-if(!title||selectedRating===0){
-alert("Nhập tên và chọn sao!");
-return;
-}
-
-if(file){
-const reader=new FileReader();
-reader.onload=function(e){
-movies.push({
-title,
-review,
-rating:selectedRating,
-poster:e.target.result
-});
-saveMovies();
-displayMovies();
-};
-reader.readAsDataURL(file);
-}else{
-movies.push({
-title,
-review,
-rating:selectedRating,
-poster:"https://via.placeholder.com/300x450?text=No+Image"
-});
-saveMovies();
-displayMovies();
-}
-
-document.getElementById("title").value="";
-document.getElementById("review").value="";
-document.getElementById("poster").value="";
-selectedRating=0;
-updateStars();
-}
-
-function deleteMovie(index){
-movies.splice(index,1);
-saveMovies();
-displayMovies();
-}
-
-function displayMovies(){
-const list=document.getElementById("movieList");
-const search=document.getElementById("search").value.toLowerCase();
-list.innerHTML="";
-
-movies
-.filter(m=>m.title.toLowerCase().includes(search))
-.forEach((movie,index)=>{
-list.innerHTML+=`
-<div class="card">
-<img src="${movie.poster}">
-<h3>${movie.title}</h3>
-<div>${"★".repeat(movie.rating)}</div>
-<p>${movie.review}</p>
-<button class="delete" onclick="deleteMovie(${index})">Xoá</button>
-</div>
-`;
-});
-}
-
-displayMovies();
+        filtered.forEach(movie => {
+            const div = document.createElement("div");
+            div.className = "movie-card";
+            div.innerHTML = `
+                <h3>${movie.title}</h3>
+                <p>${movie.desc}</p>
+            `;
+            resultsDiv.appendChild(div);
+        });
+    }
 </script>
 
 </body>
